@@ -30,3 +30,9 @@ A continuación se muestra la captura de pantalla de **Swagger UI** donde se evi
 
 <img width="1464" height="967" alt="Swagger prueba" src="https://github.com/user-attachments/assets/7c029669-f05b-44d2-a28f-68d641c7e44b" />
 
+
+A continuación se muestra la captura de pantalla de **Micosoft Azure** donde se evidencia la creacion de la base de datos.
+
+<img width="1747" height="668" alt="Prueba Azure 2" src="https://github.com/user-attachments/assets/6968efce-0b41-4666-b3ff-81ea8cf65328" />
+
+<img width="1919" height="776" alt="Prueba Azure 1" src="https://github.com/user-attachments/assets/f20025a1-24bf-48e6-93e9-a1de174a792a" />
