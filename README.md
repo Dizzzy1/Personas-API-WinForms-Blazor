@@ -1,38 +1,69 @@
-# API Web de Personas (.NET & Dapper)
+# API RESTful con Windows Forms y Blazor WebAssembly
 
-Este proyecto es una **API Web** desarrollada en **.NET** que implementa un controlador para gestionar el registro de personas. Utiliza **Dapper** como ORM ligero para realizar la persistencia de datos de forma directa en una base de datos **Azure SQL** alojada en la nube.
+## Descripción del proyecto
 
----
+Este proyecto consiste en el desarrollo e integración de una arquitectura cliente-servidor mediante una API RESTful conectada a una base de datos SQL Server alojada en Azure. La solución incorpora dos aplicaciones cliente desarrolladas con tecnologías diferentes: una aplicación de escritorio utilizando Windows Forms y una aplicación web utilizando Blazor WebAssembly.
 
-## Tecnologías Utilizadas
+La API fue desarrollada utilizando ASP.NET Core Web API y funciona como intermediaria entre las aplicaciones cliente y la base de datos. Para realizar las operaciones de acceso y consulta de información se utiliza Dapper, permitiendo ejecutar consultas SQL de manera eficiente y trabajar con los datos almacenados en SQL Server.
 
-* **Framework:** .NET 8.0 / .NET 9.0 (Web API)
-* **ORM:** Dapper (Mapeo directo y de alto rendimiento)
-* **Base de Datos:** Azure SQL Database (Microsoft Azure)
-* **Documentación:** Swagger / OpenAPI
-* **Control de Versiones:** Git & GitHub
+La aplicación Windows Forms consume los servicios de la API mediante `HttpClient`, utilizando operaciones asíncronas con `async/await` para evitar que la interfaz de usuario se bloquee durante las solicitudes. Por otro lado, la aplicación Blazor WebAssembly se comunica con la misma API mediante solicitudes HTTP y presenta los datos obtenidos de la base de datos en una interfaz web.
+
+El proyecto también incorpora la configuración de CORS (Cross-Origin Resource Sharing), necesaria para permitir que la aplicación Blazor WebAssembly pueda comunicarse correctamente con la API RESTful desde un origen diferente.
 
 ---
 
-## Requisitos del Proyecto Cumplidos
+## Objetivo general
 
-- [x] **API Web en .NET con controlador:** Implementación de `PersonasController`.
-- [x] **Uso de Dapper:** Conexiones y mapeos limpios usando `SqlConnection` y métodos asíncronos.
-- [x] **Base de Datos SQL Server:** Instancia configurada y operando en **Azure SQL**.
-- [x] **Endpoint funcional:** Endpoint `POST /api/Personas` probado y respondiendo con éxito.
-- [x] **Historial de Commits:** Repositorio público con commits ordenados y progresivos.
+Desarrollar y aplicar una arquitectura cliente-servidor mediante la integración de una API RESTful conectada a SQL Server con dos plataformas cliente diferentes: una aplicación de escritorio desarrollada con Windows Forms y una aplicación web desarrollada con Blazor WebAssembly.
 
 ---
 
-## 📸 Evidencia de Ejecución
+## Objetivos específicos
 
-A continuación se muestra la captura de pantalla de **Swagger UI** donde se evidencia el envío exitoso de los datos en formato JSON y la respuesta correcta del servidor (**Código 200 OK**):
+- Desarrollar y configurar una API RESTful utilizando ASP.NET Core.
+- Conectar la API con una base de datos SQL Server alojada en Azure.
+- Utilizar Dapper para realizar operaciones de acceso y consulta de datos.
+- Implementar endpoints HTTP para consultar y registrar información.
+- Configurar CORS para permitir la comunicación entre la API y la aplicación Blazor WebAssembly.
+- Crear una aplicación cliente de escritorio utilizando Windows Forms.
+- Diseñar una interfaz gráfica utilizando controles como `TextBox`, `Button` y `DataGridView`.
+- Consumir la API desde Windows Forms utilizando `HttpClient`.
+- Implementar operaciones asíncronas mediante `async/await` en las solicitudes realizadas desde Windows Forms.
+- Crear una aplicación web cliente utilizando Blazor WebAssembly.
+- Utilizar `HttpClient` en Blazor para realizar solicitudes a la API.
+- Mostrar en las aplicaciones cliente la información almacenada en SQL Server.
+- Integrar los diferentes componentes de la solución dentro de una arquitectura cliente-servidor.
+- Utilizar Git y GitHub para el control y almacenamiento del código fuente del proyecto.
 
-<img width="1464" height="967" alt="Swagger prueba" src="https://github.com/user-attachments/assets/7c029669-f05b-44d2-a28f-68d641c7e44b" />
+---
 
+## Arquitectura del sistema
 
-A continuación se muestra la captura de pantalla de **Micosoft Azure** donde se evidencia la creacion de la base de datos.
+La solución está organizada siguiendo una arquitectura cliente-servidor en la que dos aplicaciones cliente se comunican con una API RESTful, mientras que la API se encarga de acceder a la base de datos.
 
-<img width="1747" height="668" alt="Prueba Azure 2" src="https://github.com/user-attachments/assets/6968efce-0b41-4666-b3ff-81ea8cf65328" />
-
-<img width="1919" height="776" alt="Prueba Azure 1" src="https://github.com/user-attachments/assets/f20025a1-24bf-48e6-93e9-a1de174a792a" />
+```text
+                    ┌──────────────────────┐
+                    │   Windows Forms      │
+                    │  Aplicación Desktop  │
+                    └──────────┬───────────┘
+                               │
+                               │ HTTP
+                               ▼
+                    ┌──────────────────────┐
+                    │     ASP.NET Core     │
+                    │      Web API         │
+                    └──────────┬───────────┘
+                               │
+                               │ Dapper
+                               ▼
+                    ┌──────────────────────┐
+                    │      Azure SQL       │
+                    │     PersonasDB       │
+                    └──────────────────────┘
+                               ▲
+                               │
+                               │ HTTP
+                    ┌──────────┴───────────┐
+                    │ Blazor WebAssembly   │
+                    │    Aplicación Web    │
+                    └──────────────────────┘
