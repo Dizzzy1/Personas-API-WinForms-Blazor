@@ -19,7 +19,8 @@ namespace Personas.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CrearPersona(Persona persona)
         {
-            string connectionString = "Server=tcp:personas-api-ronald-2026.database.windows.net,1433;Initial Catalog=PersonasDB;Persist Security Info=False;User ID=Ronald;Password=RonHac@1232025;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string connectionString =
+                _configuration.GetConnectionString("DefaultConnection");
 
             using var connection = new SqlConnection(connectionString);
 
@@ -30,6 +31,21 @@ namespace Personas.Api.Controllers
             await connection.ExecuteAsync(sql, persona);
 
             return Ok("Persona guardada correctamente");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ObtenerPersonas()
+        {
+            string connectionString =
+                _configuration.GetConnectionString("DefaultConnection");
+
+            using var connection = new SqlConnection(connectionString);
+
+            string sql = "SELECT Nombre, Apellido, Edad FROM Personas";
+
+            var personas = await connection.QueryAsync<Persona>(sql);
+
+            return Ok(personas);
         }
     }
 }
